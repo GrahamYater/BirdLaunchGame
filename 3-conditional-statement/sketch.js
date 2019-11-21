@@ -7,8 +7,7 @@ let me;
 
 
 function setup() {
-  createCanvas(500, 400);
-  background(random(0,255), random(0,255), random(0,255));
+
 
   //make one avatar called me
   me = new Avatar(width/10, 300, 5);
@@ -16,14 +15,16 @@ function setup() {
 }
 
 function draw(){
+  createCanvas(500, 400);
+  background("white");
 
 
 
   me.drawMe();
   me.moveMe();
 
-  if (frameCount % 15 == 0) {
-      let  b = new Log(500, 400, 15, random(-4,4), 97, 37, 19, false);
+  if (frameCount % 100 == 0) {
+      let  b = new Log(500, random(0,290), random(3,5), random(-4,4), 97, 37, 19, false);
       logs.push(b);
       console.log(logs); //print the balls array to the console
     }
@@ -97,7 +98,7 @@ class Log {
 		  rect(this.x,this.y,100,30);
 	}
 
-	//update the location of the ball, so it moves across the screen
+	//update the location of the log, so it moves across the screen
 	moveLog(){
 		this.x = this.x+ this.speed;
 		this.y = this.y+this.yspeed;
@@ -105,23 +106,23 @@ class Log {
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
   	bounceLog(){
-    	 if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-15 && this.y < me.y+15 && this.flipped == false){
+    	  if (this.x >= me.x-0 && this.x <= me.x+0 && this.y > me.y-0 && this.y < me.y+0 && this.flipped == false){
       			this.speed = -this.speed;
             this.flipped = true
     		}
-        else if(this.x < 3){
-          this.speed *=-1
-          this.flipped = false
-        }
+        // else if(this.x < 3){
+        //   this.speed *=-1
+        //   this.flipped = false
+        // }
         else if(this.x > 500){
           this.speed = -this.speed
           this.flipped = false
         }
         else if(this.y < 0){
-          this.yspeed = -this.yspeed
+         this.yspeed = -this.yspeed
           this.flipped = false
         }
-        else if(this.y > 380){
+        else if(this.y > 370){
           this.yspeed = -this.yspeed
           this.flipped = false
         }
