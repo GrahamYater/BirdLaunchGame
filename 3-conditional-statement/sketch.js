@@ -24,8 +24,8 @@ function draw(){
   me.moveMe();
   me.die();
 
-  if (frameCount % 100 == 0) {
-      let  b = new Log(500, random(0,290), random(3,5), random(-4,4), 97, 37, 19, false);
+  if (frameCount % 80 == 0) {
+      let  b = new Log(500, random(0,290), random(4,6), random(-4,4), 97, 37, 19, false);
       logs.push(b);
     //  console.log(logs); //print the balls array to the console
     }
@@ -108,9 +108,13 @@ class Log {
 	// draw a ball on the screen at x,y
 	drawLog(){
     	stroke(0);
-      strokeWeight(2);
+      strokeWeight(0);
     	fill(this.r, this.g, this.b);
 		  rect(this.x,this.y,100,30);
+      fill("yellow");
+      triangle(this.x, this.y, this.x+25, this.y-55, this.x+56, this.y);
+      triangle(this.x+25, this.y+10, this.x-25, this.y-75, this.x+76, this.y-25);
+
 	}
 
 	//update the location of the log, so it moves across the screen
@@ -142,6 +146,7 @@ class Log {
         else if(this.y > 370){
           this.yspeed = -this.yspeed
           this.flipped = false
+
         }
   	}
 
