@@ -18,6 +18,7 @@ function draw(){
   createCanvas(500, 400);
   background("white");
 
+bezier(454, 270, 295, 144, 190, 513, 1, 243);
 
 
   me.drawMe();
@@ -79,7 +80,20 @@ class Avatar {
     if (this.alive==false) {
       this.y=this.y+3
     }
+    if(this.y > 370){
+      this.y=370
+    }
+    if(this.y < 0){
+      this.y=0
+    }
+    if(this.x > 400){
+      this.x=400
+    }
+    if(this.x < 0){
+      this.x=0
+    }
 	}
+
 
   die(){
     if (this.alive==false){
@@ -110,10 +124,9 @@ class Log {
     	stroke(0);
       strokeWeight(0);
     	fill(this.r, this.g, this.b);
-		  rect(this.x,this.y,100,30);
       fill("yellow");
       triangle(this.x, this.y, this.x+25, this.y-55, this.x+56, this.y);
-      triangle(this.x+25, this.y+10, this.x-25, this.y-75, this.x+76, this.y-25);
+      triangle(this.x+30, this.y+10, this.x-5, this.y-35, this.x+60, this.y-35);
 
 	}
 
@@ -139,15 +152,14 @@ class Log {
           this.speed = -this.speed
           this.flipped = false
         }
-        else if(this.y < 0){
+        else if(this.y < 30){
          this.yspeed = -this.yspeed
           this.flipped = false
         }
         else if(this.y > 370){
           this.yspeed = -this.yspeed
           this.flipped = false
-
         }
-  	}
+}
 
 }
