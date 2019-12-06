@@ -8,32 +8,22 @@ let me;
 
 function setup() {
   createCanvas(500, 400);
-  background(random(0,255), random(0,255), random(0,255));
+
 
   //make one avatar called me
-  me = new Avatar(width/10, 300, 5);
+  me = new Avatar(30, 30, 5);
 
 }
 
 function draw(){
-
+background("red");
 
 
   me.drawMe();
   me.moveMe();
 
-  if (frameCount % 15 == 0) {
-      let  b = new Ball(width, random(0,height), -3, random(-2,2), random(0,255), random(0,255), random(0,255), false);
-      balls.push(b);
-      console.log(balls); //print the balls array to the console
-    }
 
-//	draw all the balls in that array
-	for (let i = 0; i < balls.length; i++) {
-	 	      balls[i].drawBall();
-       	  balls[i].moveBall();
-        	balls[i].bounceBall();
-	  }
+
 
 }
 
@@ -47,33 +37,21 @@ class Avatar {
 	}
 
 	drawMe(){  // draw the running person
-    		stroke(random(0,255), random(0,255), random(0,255));
-        strokeWeight(3);
-    		fill(random(0,255), random(0,255), random(0,255));
+
+        strokeWeight(0);
+    		fill("green"), ("red"), ("Gray");
 		    ellipse(this.x,this.y,20,20);
-        line(this.x,this.y, this.x, this.y+40);
-        line(this.x, this.y+40, this.x-20, this.y+60);
-        line(this.x, this.y+40, this.x+10, this.y+50);
-        line(this.x+10, this.y+50, this.x+5, this.y+60);
-        line(this.x, this.y+15, this.x-10, this.y+25);
-        line(this.x-10, this.y+25, this.x+10, this.y+35);
-	}
+      }
 
 	moveMe(){
-    if (keyIsDown(UP_ARROW)) { //if you hold the up arrow, move up by speed
-       this.y -= this.speed;
+    if (keyIsDown(DOWN_ARROW)) { //if you hold the up arrow, move up by speed
+       this.y += this.speed;
     }
-
-    if (keyIsDown(DOWN_ARROW)) { // if you hold the down arrow, move down by speed
-        this.y += this.speed;
+    if (keyIsDown(UP_ARROW)) {
+      this.y -= this.speed;
     }
-    if (keyIsDown(LEFT_ARROW)) { //if you hold the up arrow, move up by speed
-       this.x -= this.speed;
-    }
-
-    if (keyIsDown(RIGHT_ARROW)) { // if you hold the down arrow, move down by speed
-        this.x += this.speed;
-    }
+// this.y=this.y+.5
+   this.y=this.y+.5
 	}
 
   die(){
