@@ -15,18 +15,18 @@ function setup() {
 }
 
 function draw(){
-  createCanvas(500, 400);
-  background("white");
-
-bezier(454, 270, 295, 144, 190, 513, 1, 243);
+  createCanvas(850, 650);
+  background("skyblue");
+fill("green")
+rect(0, 600, 950, 950);
 
 
   me.drawMe();
   me.moveMe();
   me.die();
 
-  if (frameCount % 80 == 0) {
-      let  b = new Log(500, random(0,290), random(4,6), random(-4,4), 97, 37, 19, false);
+  if (frameCount % 50 == 0) {
+      let  b = new Log(850, random(0,620), random(4,6), random(-4,4), 97, 37, 19, false);
       logs.push(b);
     //  console.log(logs); //print the balls array to the console
     }
@@ -40,6 +40,11 @@ bezier(454, 270, 295, 144, 190, 513, 1, 243);
 
 }
 
+let BirdSprite;
+
+function preload() {
+    BirdSprite = loadImage('BirdSprite.png');
+}
 //avatar class
 class Avatar {
 
@@ -58,7 +63,7 @@ class Avatar {
     if(this.alive==false){
         fill("red");
     }
-    		 rect(this.x,this.y,100,30);
+    		 image(BirdSprite, this.x, this.y);
 
 	}
 
@@ -80,14 +85,14 @@ class Avatar {
     if (this.alive==false) {
       this.y=this.y+3
     }
-    if(this.y > 370){
-      this.y=370
+    if(this.y > 410){
+      this.y=410
     }
     if(this.y < 0){
       this.y=0
     }
-    if(this.x > 400){
-      this.x=400
+    if(this.x > 695){
+      this.x=695
     }
     if(this.x < 0){
       this.x=0
@@ -97,7 +102,7 @@ class Avatar {
 
   die(){
     if (this.alive==false){
-    text("game over",200,200);
+    text("game over",400,300);
   }
   }
 
@@ -138,7 +143,7 @@ class Log {
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
   	bounceLog(){
-    	  if (this.x >= me.x-25 && this.x <= me.x+25 && this.y > me.y-75 && this.y < me.y+75 && this.flipped == false){
+    	  if (this.x >= me.x-100 && this.x <= me.x+100 && this.y > me.y-100 && this.y < me.y+100 && this.flipped == false){
       			this.speed = -this.speed;
             this.flipped = true
             me.alive=false
@@ -148,7 +153,7 @@ class Log {
         //   this.speed *=-1
         //   this.flipped = false
         // }
-        else if(this.x > 500){
+        else if(this.x > 850){
           this.speed = -this.speed
           this.flipped = false
         }
@@ -156,7 +161,7 @@ class Log {
          this.yspeed = -this.yspeed
           this.flipped = false
         }
-        else if(this.y > 370){
+        else if(this.y > 590){
           this.yspeed = -this.yspeed
           this.flipped = false
         }
