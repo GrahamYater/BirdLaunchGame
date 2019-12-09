@@ -10,7 +10,7 @@ function setup() {
 
 
   //make one avatar called me
-  me = new Avatar(width/10, 300, 5, true);
+  me = new Avatar(width/10, 30, 8, true);
 
 }
 
@@ -55,10 +55,9 @@ class Avatar {
         this.alive=alive;
 	}
 
-	drawMe(){  // draw the running person
+	drawMe(){  // draw the bird
     if(this.alive==true){
          noFill();
-
     }
     if(this.alive==false){
         fill("red");
@@ -97,6 +96,7 @@ class Avatar {
     if(this.x < 0){
       this.x=0
     }
+    this.y=this.y+1
 	}
 
 
@@ -143,7 +143,7 @@ class Log {
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
   	bounceLog(){
-    	  if (this.x >= me.x-100 && this.x <= me.x+100 && this.y > me.y-100 && this.y < me.y+100 && this.flipped == false){
+    	  if (this.x >= me.x-25 && this.x <= me.x+120 && this.y > me.y-1 && this.y < me.y+205 && this.flipped == false){
       			this.speed = -this.speed;
             this.flipped = true
             me.alive=false
