@@ -16,8 +16,16 @@ function setup() {
 }
 
 function draw(){
+<<<<<<< Updated upstream
 
 
+=======
+  createCanvas(850, 650);
+  background("skyblue");
+fill("green")
+rect(0, 600, 950, 950);
+text("Move With Up, Down, Left, Right, Arrows", 800,50);
+>>>>>>> Stashed changes
 
   me.drawMe();
   me.moveMe();
