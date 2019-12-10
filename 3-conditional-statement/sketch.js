@@ -20,7 +20,7 @@ function draw(){
   background("skyblue");
 fill("green")
 rect(0, 600, 950, 950);
-let s = 'Move With Up, Down, Left, Right Arrows   AVOID THE STARS';
+let s = 'Move With Up, Down, Left, Right Arrows        AVOID THE STARS';
 fill("black");
 text(s, 10, 10, 100, 180);
 
