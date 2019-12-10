@@ -20,7 +20,9 @@ function draw(){
   background("skyblue");
 fill("green")
 rect(0, 600, 950, 950);
-text("Move With Up, Down, Left, Right, Arrows", 800,50);
+let s = 'Move With Up, Down, Left, Right Arrows';
+fill(50);
+text(s, 10, 10, 70, 80);
 
 
   me.drawMe();
