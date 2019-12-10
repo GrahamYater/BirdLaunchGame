@@ -1,5 +1,5 @@
 //create an empty array called balls
-let balls = [];
+let logs = [];
 
 //create a variable to hold your avatar
 let me;
@@ -7,92 +7,112 @@ let me;
 
 
 function setup() {
-  createCanvas(500, 400);
-  background(random(0,255), random(0,255), random(0,255));
+
 
   //make one avatar called me
-  me = new Avatar(width/10, 300, 5);
+  me = new Avatar(width/10, 30, 8, true);
 
 }
 
 function draw(){
-<<<<<<< Updated upstream
 
-
-=======
   createCanvas(850, 650);
   background("skyblue");
 fill("green")
 rect(0, 600, 950, 950);
 text("Move With Up, Down, Left, Right, Arrows", 800,50);
->>>>>>> Stashed changes
+
 
   me.drawMe();
   me.moveMe();
+  me.die();
 
-  if (frameCount % 15 == 0) {
-      let  b = new Ball(width, random(0,height), -3, random(-2,2), random(0,255), random(0,255), random(0,255), false);
-      balls.push(b);
-      console.log(balls); //print the balls array to the console
+  if (frameCount % 50 == 0) {
+      let  b = new Log(850, random(0,620), random(4,6), random(-4,4), 97, 37, 19, false);
+      logs.push(b);
+    //  console.log(logs); //print the balls array to the console
     }
 
 //	draw all the balls in that array
-	for (let i = 0; i < balls.length; i++) {
-	 	      balls[i].drawBall();
-       	  balls[i].moveBall();
-        	balls[i].bounceBall();
+	for (let i = 0; i < logs.length; i++) {
+	 	      logs[i].drawLog();
+       	  logs[i].moveLog();
+        	logs[i].bounceLog();
 	  }
 
 }
 
+let BirdSprite;
+
+function preload() {
+    BirdSprite = loadImage('BirdSprite.png');
+}
 //avatar class
 class Avatar {
 
-	constructor(x,y, speed){ //every avatar needs an x value, a y value, and a speed
+	constructor(x,y, speed,alive){ //every avatar needs an x value, a y value, and a speed
 		    this.x = x;
     		this.y = y;
         this.speed = speed;
+        this.alive=alive;
 	}
 
-	drawMe(){  // draw the running person
-    		stroke(random(0,255), random(0,255), random(0,255));
-        strokeWeight(3);
-    		fill(random(0,255), random(0,255), random(0,255));
-		    ellipse(this.x,this.y,20,20);
-        line(this.x,this.y, this.x, this.y+40);
-        line(this.x, this.y+40, this.x-20, this.y+60);
-        line(this.x, this.y+40, this.x+10, this.y+50);
-        line(this.x+10, this.y+50, this.x+5, this.y+60);
-        line(this.x, this.y+15, this.x-10, this.y+25);
-        line(this.x-10, this.y+25, this.x+10, this.y+35);
+	drawMe(){  // draw the bird
+    if(this.alive==true){
+         noFill();
+    }
+    if(this.alive==false){
+        fill("red");
+    }
+    		 image(BirdSprite, this.x, this.y);
+
 	}
 
 	moveMe(){
-    if (keyIsDown(UP_ARROW)) { //if you hold the up arrow, move up by speed
+    if (keyIsDown(UP_ARROW)&&this.alive==true) { //if you hold the up arrow, move up by speed
        this.y -= this.speed;
     }
 
-    if (keyIsDown(DOWN_ARROW)) { // if you hold the down arrow, move down by speed
+    if (keyIsDown(DOWN_ARROW)&&this.alive==true) { // if you hold the down arrow, move down by speed
         this.y += this.speed;
     }
-    if (keyIsDown(LEFT_ARROW)) { //if you hold the up arrow, move up by speed
+    if (keyIsDown(LEFT_ARROW)&&this.alive==true) { //if you hold the up arrow, move up by speed
        this.x -= this.speed;
     }
 
-    if (keyIsDown(RIGHT_ARROW)) { // if you hold the down arrow, move down by speed
+    if (keyIsDown(RIGHT_ARROW)&&this.alive==true) { // if you hold the down arrow, move down by speed
         this.x += this.speed;
     }
+    if (this.alive==false) {
+      this.y=this.y+3
+    }
+    if(this.y > 410){
+      this.y=410
+    }
+    if(this.y < 0){
+      this.y=0
+    }
+    if(this.x > 695){
+      this.x=695
+    }
+    if(this.x < 0){
+      this.x=0
+    }
+    this.y=this.y+1
 	}
 
-  die(){
 
+  die(){
+    if (this.alive==false){
+    text("game over",400,300);
+  }
   }
 
 }
 
 
 //ball class from which to create new balls with similar properties.
-class Ball {
+class Log {
 
 	//every ball needs an x value, a y value, and a speed
 	constructor(x,y, speed, yspeed, r, g, b, flipped){
@@ -107,41 +127,46 @@ class Ball {
 	}
 
 	// draw a ball on the screen at x,y
-	drawBall(){
+	drawLog(){
     	stroke(0);
-      strokeWeight(2);
+      strokeWeight(0);
     	fill(this.r, this.g, this.b);
-		  rect(this.x,this.y,10,20);
+      fill("yellow");
+      triangle(this.x, this.y, this.x+25, this.y-55, this.x+56, this.y);
+      triangle(this.x+30, this.y+10, this.x-5, this.y-35, this.x+60, this.y-35);
+
 	}
 
-	//update the location of the ball, so it moves across the screen
-	moveBall(){
+	//update the location of the log, so it moves across the screen
+	moveLog(){
 		this.x = this.x+ this.speed;
 		this.y = this.y+this.yspeed;
 	}
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
-  	bounceBall(){
-    	 if (this.x >= me.x-75 && this.x <= me.x+75 && this.y > me.y-80 && this.y < me.y+80 && this.flipped == false){
+  	bounceLog(){
+    	  if (this.x >= me.x-25 && this.x <= me.x+120 && this.y > me.y-1 && this.y < me.y+205 && this.flipped == false){
       			this.speed = -this.speed;
             this.flipped = true
+            me.alive=false
+            print("died")
     		}
-        else if(this.x < 3){
-          this.speed *=-1
-          this.flipped = false
-        }
-        else if(this.x > 500){
+        // else if(this.x < 3){
+        //   this.speed *=-1
+        //   this.flipped = false
+        // }
+        else if(this.x > 850){
           this.speed = -this.speed
           this.flipped = false
         }
-        else if(this.y < 0){
+        else if(this.y < 30){
+         this.yspeed = -this.yspeed
+          this.flipped = false
+        }
+        else if(this.y > 590){
           this.yspeed = -this.yspeed
           this.flipped = false
         }
-        else if(this.y > 380){
-          this.yspeed = -this.yspeed
-          this.flipped = false
-        }
-  	}
+}
 
 }
